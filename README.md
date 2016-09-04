@@ -12,6 +12,8 @@
 - `pip install -e .`
 - `npm install`
 - `cp gsweb/defaults.cfg gsweb.cfg`
+- Set a `SECRET_KEY` in gsweb.cfg and change `SQLALCHEMY_DATABASE_URI` if necessary
+- Create a Postgres database, e.g. using `createdb gsweb`
 
 
 ### Enable code style checks
@@ -28,5 +30,6 @@ in the script to the local eslint (e.g. `node_modules/.bin/eslint`).
 
 ### Run
 - `export FLASK_APP=gsweb._cliapp FLASK_DEBUG=1 GSWEB_CONFIG=/path/to/your/gsweb.cfg`
+- `flask createdb` (creates tables in the database)
 - `flask gulp` (monitors and rebuilds assets)
 - `flask run --with-threads`
