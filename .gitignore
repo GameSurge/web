@@ -2,8 +2,8 @@
 /.venv/
 
 # config file
-gsweb.cfg
-logging.yml
+/gsweb.cfg
+/logging.yml
 
 # temporary files
 *~
