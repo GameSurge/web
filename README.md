@@ -1,5 +1,7 @@
 # GameSurge website
 
+[![Build Status](https://travis-ci.org/GameSurge/web.svg?branch=master)](https://travis-ci.org/GameSurge/web)
+
 ## Development
 
 ### Install
