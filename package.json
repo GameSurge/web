@@ -1,0 +1,9 @@
+{
+  "name": "gsweb-gulp",
+  "version": "1.0.0",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rework": "^1.2.0",
+    "gulp-sass": "^2.3.2"
+  }
+}

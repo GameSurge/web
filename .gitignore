@@ -1,0 +1,31 @@
+# virtualenv
+/.venv/
+
+# config file
+gsweb.cfg
+logging.yml
+
+# temporary files
+*~
+.*.swp
+
+# bytecode
+*.py[co]
+__pycache__/
+
+# python packaging
+/dist/
+/build/
+*.egg-info
+*.egg
+
+# IDE files
+/.idea/
+*.sublime-*
+
+# testing
+/.cache/
+
+# assets
+/node_modules/
+/gsweb/static/assets/*
