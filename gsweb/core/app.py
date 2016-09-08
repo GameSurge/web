@@ -8,7 +8,7 @@ from flask import Flask
 from werkzeug.contrib.fixers import ProxyFix
 
 from gsweb import db
-from gsweb.cli import gulp_command, createdb_command
+from gsweb.core.cli import gulp_command, createdb_command
 from gsweb.util.db import import_all_models
 
 
