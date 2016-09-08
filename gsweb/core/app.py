@@ -9,6 +9,7 @@ from werkzeug.contrib.fixers import ProxyFix
 
 from gsweb import db
 from gsweb.core.cli import gulp_command, createdb_command
+from gsweb.core.srvx import srvx
 from gsweb.util.db import import_all_models
 
 
@@ -66,7 +67,7 @@ def _setup_db(app):
 
 
 def _setup_extensions(app):
-    pass
+    srvx.init_app(app)
 
 
 def _setup_cli(app):
@@ -77,7 +78,7 @@ def _setup_cli(app):
 def _register_handlers(app):
     @app.shell_context_processor
     def _extend_shell_context():
-        ctx = {'db': db}
+        ctx = {'db': db, 'srvx': srvx}
         ctx.update(db.Model._decl_class_registry)
         ctx.update((x, getattr(datetime, x)) for x in ('date', 'time', 'datetime', 'timedelta'))
         return ctx

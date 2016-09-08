@@ -11,3 +11,5 @@ flask-shell-ipython==0.2.2
 SQLAlchemy==1.0.15
 Flask-SQLAlchemy==2.1
 psycopg2==2.6.2
+
+https://github.com/GameSurge/pysrvx/archive/master.zip

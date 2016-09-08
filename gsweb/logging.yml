@@ -17,6 +17,10 @@ loggers:
     handlers: [console]
     propagate: false
     level: DEBUG
+  pysrvx:
+    handlers: [console]
+    propagate: false
+    level: WARNING
 
 root:
   handlers: [console]
