@@ -2,4 +2,11 @@
 
 {% block content %}
     <p>Welcome to GameSurge!</p>
+    <p>
+        {% if current_user %}
+            <a href="{{ url_for('.logout') }}">Log out</a> [{{ current_user.name }}]
+        {% else %}
+            <a href="{{ url_for('.login') }}">Log in</a>
+        {% endif %}
+    </p>
 {% endblock %}

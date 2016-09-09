@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <p>Log in using your AuthServ account</p>
+    <form method="post">
+        {# XXX: Switch to Jinja macros to render forms nicely once we have a design #}
+        {{ form.csrf_token }}
+        {{ form.username(placeholder=form.username.label.text, required=true) }}
+        {{ form.password(placeholder=form.password.label.text, required=true) }}
+        <input type="submit" value="Log in">
+        {% if form.error_list %}
+            <ul>
+                {% for error in form.error_list %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </form>
+{% endblock %}
