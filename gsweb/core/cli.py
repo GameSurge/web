@@ -11,7 +11,7 @@ GULP_PATH = 'node_modules/.bin/gulp'
 
 @click.option('--watch/--no-watch', default=None,
               help='Enable or disable the watcher.  By default the watcher is active if debug is enabled.  Without the '
-                   'watch the command only builds the assets and then terminates.')
+                   'watcher this command only builds the assets and then terminates.')
 @with_appcontext
 def gulp_command(watch):
     """Runs gulp to build/monitor assets."""
