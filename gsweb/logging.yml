@@ -5,12 +5,18 @@ incremental: false
 formatters:
   default:
     format: '%(asctime)s   %(name)-17s   %(levelname)-8s   %(message)s'
+  message_only:
+    format: '%(message)s'
 
 handlers:
   console:
     class: logging.StreamHandler
     level: DEBUG
     formatter: default
+  console_werkzeug:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: message_only
 
 loggers:
   gsweb:
@@ -22,7 +28,7 @@ loggers:
     propagate: false
     level: WARNING
   werkzeug:
-    handlers: [console]
+    handlers: [console_werkzeug]
     propagate: false
     level: INFO
 
