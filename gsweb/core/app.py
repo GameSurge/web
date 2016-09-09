@@ -9,6 +9,7 @@ from werkzeug.contrib.fixers import ProxyFix
 
 from gsweb import db
 from gsweb.core.cli import gulp_command, createdb_command
+from gsweb.core.csrf import csrf
 from gsweb.core.srvx import srvx
 from gsweb.util.db import import_all_models
 
@@ -67,6 +68,7 @@ def _setup_db(app):
 
 
 def _setup_extensions(app):
+    csrf.init_app(app)
     srvx.init_app(app)
 
 
