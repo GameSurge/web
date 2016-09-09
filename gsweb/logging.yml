@@ -21,6 +21,10 @@ loggers:
     handlers: [console]
     propagate: false
     level: WARNING
+  werkzeug:
+    handlers: [console]
+    propagate: false
+    level: INFO
 
 root:
   handlers: [console]
