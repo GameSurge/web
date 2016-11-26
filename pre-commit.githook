@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # vim: et ts=4 sw=4 ft=sh
 
 # Interesting post on max line length:
@@ -7,6 +7,7 @@
 PEP8_CMD='pep8'
 PEP8_OPTIONS='--max-line-length=120'
 ESLINT_CMD='eslint'
+SASSLINT_CMD='sass-lint'
 
 
 RED=`echo -e $"\033[1;31m"`
@@ -48,6 +49,21 @@ if [[ -n "$FILES" ]]; then
     elif [[ -n "$RESULT" ]] ; then
         STATUS=1
         echo "${BRIGHTYELLOW}There are JS warnings in your code:${RESET}"
+        echo "$RESULT"
+    fi
+fi
+
+FILES=$(git diff --staged --name-status HEAD '*.scss' | awk '$1 != "D" {print $2}' | xargs)
+if [[ -n "$FILES" ]]; then
+    RESULT=`$SASSLINT_CMD -vq $FILES`
+    RC=$?
+    if [[ $RC != 0 ]] ; then
+        STATUS=1
+        echo "${RED}There are SCSS errors in your code:${RESET}"
+        echo "$RESULT"
+    elif [[ -n "$RESULT" ]] ; then
+        STATUS=1
+        echo "${BRIGHTYELLOW}There are SCSS warnings in your code:${RESET}"
         echo "$RESULT"
     fi
 fi

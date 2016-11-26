@@ -6,10 +6,11 @@ install:
   - . $HOME/.nvm/nvm.sh
   - nvm install stable
   - nvm use stable
-  - npm install eslint
+  - npm install eslint sass-lint
   - pip install pep8
 script:
   - pep8 --max-line-length 120 gsweb
   - eslint gsweb
+  - sass-lint -vq
 notifications:
   email: false
