@@ -5,6 +5,7 @@ import os
 
 import yaml
 from flask import Flask
+from pysrvx import SrvXError
 from werkzeug.contrib.fixers import ProxyFix
 
 from gsweb import db
@@ -86,6 +87,12 @@ def _register_handlers(app):
         ctx.update(db.Model._decl_class_registry)
         ctx.update((x, getattr(datetime, x)) for x in ('date', 'time', 'datetime', 'timedelta'))
         return ctx
+
+    @app.errorhandler(SrvXError)
+    def _handle_srvx_error(error):
+        app.logger.exception('SrvX operation failed')
+        # TODO: Display a prettier error page
+        return 'Services unavailable', 503
 
 
 def _register_blueprints(app):
