@@ -18,13 +18,14 @@
 
 ### Enable code style checks
 
-- Install eslint so it's in your PATH (e.g. `sudo npm install -g eslint`)
+- Install eslint and sass-lint so it's in your PATH (e.g. `sudo npm install -g eslint sass-lint`)
 - `pip install pep8`
 - `ln -sr pre-commit.githook .git/hooks/pre-commit`
 
 If you do not want to install eslint globally you can also install it locally,
 copy the git hook instead of symlinking it and point the `ESLINT_CMD` variable
-in the script to the local eslint (e.g. `node_modules/.bin/eslint`).
+in the script to the local eslint (e.g. `node_modules/.bin/eslint`).  
+The same applies to sass-lint (`SASSLINT_CMD`)
 
 
 
