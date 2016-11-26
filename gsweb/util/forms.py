@@ -1,4 +1,4 @@
-import flask_wtf
+from flask_wtf import FlaskForm
 from wtforms import FieldList
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
@@ -7,7 +7,7 @@ def _strip_whitespace(s):
     return s.strip() if isinstance(s, str) else s
 
 
-class Form(flask_wtf.Form):
+class Form(FlaskForm):
     class Meta:
         def bind_field(self, form, unbound_field, options):
             # We don't set default filters for query-based fields as it breaks them if no query_factory is set
