@@ -4,12 +4,18 @@
 'use strict';
 
 var fs = require('fs');
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var rework = require('gulp-rework');
 var path = require('path');
 
+var cleanCSS = require('gulp-clean-css');
+var gulp = require('gulp');
+var gulpif = require('gulp-if');
+var rework = require('gulp-rework');
+var sass = require('gulp-sass');
+var uglify = require('gulp-uglify');
+
 var STATIC_BASE = 'gsweb/static/';
+var BOOTSTRAP_BASE = 'node_modules/bootstrap/dist/';
+var MINIFY = process.env.GSWEB_MINIFY === '1';
 
 
 if (!process.env.GSWEB_ASSETS_FOLDER) {
@@ -60,17 +66,37 @@ function reworkCSSURLs(style) {
 }
 
 
+gulp.task('bootstrap-css', function() {
+    return gulp.src(BOOTSTRAP_BASE + 'css/bootstrap-flex.css')
+        .pipe(gulpif(MINIFY, cleanCSS({sourceMap: false})))
+        .pipe(gulp.dest(process.env.GSWEB_ASSETS_FOLDER));
+});
+
+
+gulp.task('bootstrap-js', function() {
+    return gulp.src(BOOTSTRAP_BASE + 'js/bootstrap.js')
+        .pipe(gulpif(MINIFY, uglify()))
+        .pipe(gulp.dest(process.env.GSWEB_ASSETS_FOLDER));
+});
+
+
 gulp.task('scss', function() {
     return gulp.src(STATIC_BASE + 'css/gsweb.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(rework(reworkCSSURLs))
+        .pipe(gulpif(MINIFY, cleanCSS({sourceMap: false})))
+        .pipe(gulp.dest(process.env.GSWEB_ASSETS_FOLDER));
+});
+
+
+gulp.task('js', function() {
+    return gulp.src(STATIC_BASE + 'js/gsweb.js')
+        .pipe(gulpif(MINIFY, uglify()))
         .pipe(gulp.dest(process.env.GSWEB_ASSETS_FOLDER));
 });
 
 
 gulp.task('watch', function() {
     verboseWatcher(gulp.watch(STATIC_BASE + 'css/**/*.scss', ['scss']));
+    verboseWatcher(gulp.watch(STATIC_BASE + 'js/**/*.js', ['js']));
 });
-
-
-gulp.task('default', ['scss', 'watch']);
