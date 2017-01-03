@@ -6,11 +6,14 @@
 var fs = require('fs');
 var path = require('path');
 
+var browserify = require('browserify');
+var buffer = require('vinyl-buffer');
 var cleanCSS = require('gulp-clean-css');
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var rework = require('gulp-rework');
 var sass = require('gulp-sass');
+var source = require('vinyl-source-stream');
 var uglify = require('gulp-uglify');
 
 var STATIC_BASE = 'gsweb/static/';
@@ -73,13 +76,6 @@ gulp.task('bootstrap-css', function() {
 });
 
 
-gulp.task('bootstrap-js', function() {
-    return gulp.src(BOOTSTRAP_BASE + 'js/bootstrap.js')
-        .pipe(gulpif(MINIFY, uglify()))
-        .pipe(gulp.dest(process.env.GSWEB_ASSETS_FOLDER));
-});
-
-
 gulp.task('scss', function() {
     return gulp.src(STATIC_BASE + 'css/gsweb.scss')
         .pipe(sass().on('error', sass.logError))
@@ -90,7 +86,16 @@ gulp.task('scss', function() {
 
 
 gulp.task('js', function() {
-    return gulp.src(STATIC_BASE + 'js/gsweb.js')
+    // https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-uglify-sourcemap.md
+    var b = browserify({
+        entries: [
+            STATIC_BASE + 'js/gsweb.js',
+            STATIC_BASE + 'js/_bootstrap.js'
+        ]
+    });
+    return b.bundle()
+        .pipe(source('gsweb.js'))
+        .pipe(buffer())
         .pipe(gulpif(MINIFY, uglify()))
         .pipe(gulp.dest(process.env.GSWEB_ASSETS_FOLDER));
 });

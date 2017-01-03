@@ -27,7 +27,7 @@ def gulp_command(watch, minify):
     print('Assets folder: {}'.format(assets_folder))
     os.environ['GSWEB_ASSETS_FOLDER'] = assets_folder
     os.environ['GSWEB_MINIFY'] = str(int(minify))
-    gulp_args = ['bootstrap-css', 'bootstrap-js', 'scss', 'js']
+    gulp_args = ['bootstrap-css', 'scss', 'js']
     if watch:
         gulp_args.append('watch')
     os.execv(GULP_PATH, [os.path.basename(GULP_PATH)] + gulp_args)

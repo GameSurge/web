@@ -1,6 +1,6 @@
 env:
   browser: true
-  jquery: true
+  commonjs: true
 
 extends: 'eslint:recommended'
 
@@ -51,8 +51,8 @@ rules:
     - warn
     - never
   brace-style:
-      - error
-      - 1tbs
+    - error
+    - 1tbs
   array-callback-return: error
   comma-spacing: error
   comma-style: error
