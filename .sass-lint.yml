@@ -60,7 +60,7 @@ rules:
     - 2
     - convention: hyphenatedlowercase
       allow-leading-underscore: true
-  mixins-before-declarations: 0
+  mixins-before-declarations: 1
   nesting-depth:
     - 1
     - max-depth: 4
@@ -77,7 +77,7 @@ rules:
     - exclude: [background-image, display]
   no-empty-rulesets: 2
   no-extends: 0
-  no-ids: 0
+  no-ids: 1
   no-important: 0
   no-invalid-hex: 2
   no-mergeable-selectors: 1
@@ -103,7 +103,7 @@ rules:
       allow-leading-underscore: false
   property-sort-order: 0
   property-units: 0
-  pseudo-element: 0
+  pseudo-element: 2
   quotes:
     - 1
     - style: single
